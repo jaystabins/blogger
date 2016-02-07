@@ -44,11 +44,11 @@
     <small class="text-danger">{{ $errors->first('category_list') }}</small>
 </div>
 
-<div class="form-group" style="display:none;" id="hiddenDiv">
+<div class="form-group" id="hiddenDiv">
     <div class="checkbox">
-        <label for="add_menu">
-            {!! Form::hidden('add_menu', 0) !!}
-            {!! Form::checkbox('add_menu', false, false, ['id' => 'add_menu']) !!} <b>Add Menu</b>
+        <label for="auto_category_menu">
+            {!! Form::hidden('auto_category_menu', 0) !!}
+            {!! Form::checkbox('auto_category_menu', true, true, ['id' => 'auto_category_menu']) !!} <b>Add Menu</b>
         </label>
     </div>
     <small class="text-danger">{{ $errors->first('add_menu') }}</small>

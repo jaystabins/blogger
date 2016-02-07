@@ -102,4 +102,13 @@ class ManageController extends Controller
 
         return view('articles.manage', compact('articles', 'blog_info', 'categories'));
     }
+
+    public function updateCategory(Request $request)
+    {
+        $category = \App\Category::where('id', '=', $request->id)->first();
+        $category->add_menu = $request->checked;
+        $category->save();
+
+        return 'success';
+    }
 }

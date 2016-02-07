@@ -4,7 +4,7 @@
         <hr>
         <ol class="list-unstyled">
         @foreach($menuCategories as $category)
-            <li><a href="{{url('tags', $category->name) }}">{{ $category->name }}</a></li>
+            <li><a href="{{url('category', $category->name) }}">{{ $category->name }}</a></li>
         @endforeach
         </ol>
     </div>

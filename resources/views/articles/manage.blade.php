@@ -115,6 +115,24 @@
 	            selectFIleWithCKFinder('featured_image');
 	        });
 
+	        $('input[id^="menuId"]').on('click', function() {
+
+	        	var id = this.id.match(/\d+/);
+	        	var checked = $('#menuId' + id).is(':checked') ? '1' : '0';
+
+	        	$.ajax({
+	        		url: 'updateCategory',
+	        		type: 'POST',        
+	        		beforeSend: function (xhr) {
+            			var token = $('meta[name="csrf_token"]').attr('content');
+            			if (token) {
+                 			 return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+			            }
+			        },
+			        data: { id , checked }
+	        	})
+	        });
+
 	        function selectFIleWithCKFinder( elementId ) {
 	            CKFinder.modal( {
 	                chooseFiles: true,

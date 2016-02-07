@@ -27,6 +27,8 @@
 	<meta name="twitter:description" content="" />
 	<meta name="twitter:image" content="" />
 
+	<meta name="csrf_token" content="{{ csrf_token() }}" />
+
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	
 	<!-- Font Awesome -->

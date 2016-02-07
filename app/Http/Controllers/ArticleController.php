@@ -61,13 +61,8 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $categories = DB::table('categories')->where('name', $request->category_list[0])->first();
-        //dd($request->all());
-
         //Create a new article and save it with the relationship built in the model
         $article = \Auth::user()->articles()->create($request->all());
-
-        //$article->category_id = $categories->id;
         
         $excerpt = substr(preg_replace("/<img[^>]+\>/i", "(image) ", $article->body), 0, 200);
         $article->excerpt = $excerpt;
@@ -75,6 +70,22 @@ class ArticleController extends Controller
 
         $this->syncTags($article, (array) $request->input('tag_list'));
         $this->syncCategories($article, (array) $request->input('category_list'));
+
+        $info = DB::table('blog_info')->first();
+
+        if($request->auto_category_menu == '1' || $info->auto_category_menu == 1)
+        {
+            $category_id = DB::table('article_category')
+                            ->select('category_id')
+                            ->where('article_id', '=', $article->id)
+                            ->get();
+
+            $category = Category::where('id', '=', $category_id[0]->category_id)
+                            ->first();
+
+            $category->add_menu = 1;
+            $category->save();
+        }
 
         return redirect('/');
     }
@@ -137,6 +148,22 @@ class ArticleController extends Controller
         //todo: probably rethink this logic add some helper function to update slug or remove from model
         $article = Article::findOrFail($request->id);
 
+        $info = DB::table('blog_info')->first();
+
+        if($request->auto_category_menu == '1' || $info[0]->auto_category_menu == 1)
+        {
+            $category_id = DB::table('article_category')
+                            ->select('category_id')
+                            ->where('article_id', '=', $article->id)
+                            ->get();
+
+            $category = Category::where('id', '=', $category_id[0]->category_id)
+                            ->first();
+
+            $category->add_menu = 1;
+            $category->save();
+        }
+
         return redirect(route('blog.show', ['slug' => $article->slug]));
     }
 
@@ -185,16 +212,16 @@ class ArticleController extends Controller
      */
     public function search(Request $request)
     {
-            $articles = Article::join('article_tag', 'articles.id', '=', 'article_tag.article_id')
-                            ->join('tags', 'tags.id', '=', 'article_tag.tag_id')
-                            ->where('title', 'LIKE', "%$request->term%")
-                            ->orWhere('subtitle', 'LIKE', "%$request->term%")
-                            ->orWhere('body', 'LIKE', "%$request->term%")
-                            ->orWhere('slug', 'LIKE', "%$request->term%")
-                            ->orWhere('name', 'LIKE', "%$request->term%")
-                            ->groupBy('articles.slug')
-                            ->published()
-                            ->paginate(5);
+        $articles = Article::join('article_tag', 'articles.id', '=', 'article_tag.article_id')
+                        ->join('tags', 'tags.id', '=', 'article_tag.tag_id')
+                        ->where('title', 'LIKE', "%$request->term%")
+                        ->orWhere('subtitle', 'LIKE', "%$request->term%")
+                        ->orWhere('body', 'LIKE', "%$request->term%")
+                        ->orWhere('slug', 'LIKE', "%$request->term%")
+                        ->orWhere('name', 'LIKE', "%$request->term%")
+                        ->groupBy('articles.slug')
+                        ->published()
+                        ->paginate(5);
 
         if( $articles->isEmpty() )
             abort(404);

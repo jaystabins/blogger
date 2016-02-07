@@ -7,6 +7,7 @@ Route::any('/auth/register', function() {
 	return redirect('/');
 });
 
+Route::post('blog/updateCategory', 'ManageController@updateCategory');
 /**
  * Basic Pages Controller
  */
