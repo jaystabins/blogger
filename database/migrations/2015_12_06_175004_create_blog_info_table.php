@@ -20,6 +20,7 @@ class CreateBlogInfoTable extends Migration
             $table->string('email');
             $table->boolean('auto_category_menu');
             $table->string('featured_image');
+            $table->string('disqus_shortname');
             $table->timestamps();
         });
     }

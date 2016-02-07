@@ -40,7 +40,7 @@
 			<div id="disqus_thread"></div>
 				<script type="text/javascript">
 				    /* * * CONFIGURATION VARIABLES * * */
-				    var disqus_shortname = 'smashub';
+				    var disqus_shortname = '{{ $blog_info->disqus_shortname }}';
 				    var disqus_disqus_identifier = '{{ $article->id }}';
 				    var disqus_title = '{{ $article->title }}';
 				    var disqus_url = '{!! Request::url() !!}';

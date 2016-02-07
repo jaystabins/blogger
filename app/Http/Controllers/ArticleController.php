@@ -99,11 +99,12 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $article = Article::where('slug', '=', $slug)->published()->first();
+        $blog_info = \App\BlogInfo::first();
 
         if( ! $article )
             abort(404);
 
-        return view('articles.single', compact('article'));
+        return view('articles.single', compact('article', 'blog_info'));
     }
 
     /**

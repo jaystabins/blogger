@@ -81,6 +81,16 @@
 					    <small class="text-danger">{{ $errors->first('email') }}</small>
 					</div>
 					<div class="form-group">
+					    {!! Form::label('disqus_shortname', 'Disqus Shortname:') !!}
+	                	<div class="form-inline">
+					    	{!! Form::text('disqus_shortname', null, ['class' => 'form-control', 'required' => 'required']) !!}
+					    	<a href="https://disqus.com/admin/signup/" target="_blank" type="button" class="btn btn-default pull-right">
+						  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Create Disqus Account
+							</a>
+						</div>
+					    <small class="text-danger">{{ $errors->first('disqus_shortname') }}</small>
+					</div>
+					<div class="form-group">
 					    {!! Form::label('featured_image', 'Featured Image:') !!}
 					    <div class="input-group">
 					        {!! Form::text('featured_image', null, ['id' => 'featured_image', 'class' => 'form-control', 'readonly' => 'true']) !!}

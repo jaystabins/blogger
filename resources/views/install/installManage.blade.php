@@ -33,8 +33,18 @@
 							<div class="form-inline">
 			                    <label for="auto_category_menu">Would You Like To Auto Add Categories To Menu?</label>                
 			                    {!! Form::select('auto_category_menu', ['No', 'Yes'], null, ['class' => 'form-control pull-right']) !!}
-
 			                </div>
+			                <hr />
+			                <div class="form-group">
+							    {!! Form::label('disqus_shortname', 'Disqus Shortname:') !!}
+			                	<div class="form-inline">
+							    	{!! Form::text('disqus_shortname', null, ['class' => 'form-control', 'required' => 'required']) !!}
+							    	<a href="https://disqus.com/admin/signup/" target="_blank" type="button" class="btn btn-default pull-right">
+								  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Create Disqus Account
+									</a>
+								</div>
+							    <small class="text-danger">{{ $errors->first('disqus_shortname') }}</small>
+							</div>
 							<div class="form-group">
 							    {!! Form::label('featured_image', 'Featured Image:') !!}
 							    <div class="input-group">
