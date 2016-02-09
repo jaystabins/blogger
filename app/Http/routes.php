@@ -7,35 +7,48 @@ Route::any('/auth/register', function() {
 	return redirect('/');
 });
 
-Route::post('blog/updateCategory', 'ManageController@updateCategory');
 /**
  * Basic Pages Controller
  */
 Route::get('/', 'ArticleController@index');
-Route::get('contact', 'PagesController@contact');
-Route::get('about', 'PagesController@about');
 
-Route::get('blog/manage', 'ManageController@manageArticles');
-
-
-
+/**
+ * Install Blog
+ */
 Route::get('install', [
 			'as' => 'install', 'uses' => 'Install\InstallController@installBlogShow']);
 Route::post('install', [
 			'as' => 'install', 'uses' => 'Install\InstallController@installBlog']);
-
 Route::post('install/register', [
 			'as' => 'install.register', 'uses' => 'Install\InstallController@installRegister']);
 Route::post('install/manage', [
 			'as' => 'install.manage', 'uses' => 'Install\InstallController@installManage']);
 
 
+Route::get('{page}', 'PagesController@index');
+Route::get('page/create', 'PagesController@create');
+Route::post('page/store', [
+			'as' => 'page.store', 'uses' => 'PagesController@store']);
+Route::get('page/edit/{id}', [
+			'as' => 'page.edit', 'uses' => 'PagesController@edit']);
+Route::delete('{slug}', [
+			'as' => 'page.delete', 'uses' => 'PagesController@destroy']);
+Route::put('{slug}', [
+			'as' => 'page.update', 'uses' => 'PagesController@update']);
+
+/**
+ * Main Manage Screen
+ */
+Route::get('blog/manage', 'ManageController@manageArticles');
 /**
  * Handles install and update of blog info
  */
 Route::post('blog/manage/store', [
 			'as' => 'blog.manage.store', 'uses' => 'ManageController@storeBlogInfo']);
-
+/**
+ * Handles ajax request to update blog Catagory Visability
+ */
+Route::post('blog/updateCategory', 'ManageController@updateCategory');
 /**
  * Basic search with post data
  */
@@ -56,13 +69,12 @@ Route::controllers([
 Route::resource('blog', 'ArticleController');
 Route::get('blog/{year}/{month}', 'ArticleController@showMonth');
 
-
 /**
  * Tags Controller routes
  */
 Route::get('tags/{tag}', 'TagsController@show');
 
 /**
- * Tags Controller routes
+ * Category Controller routes
  */
 Route::get('category/{category}', 'CategoryController@show');

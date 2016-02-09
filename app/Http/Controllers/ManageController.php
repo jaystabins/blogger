@@ -13,6 +13,7 @@ use Auth;
 use App\User;
 use App\BlogInfo;
 use App\Category;
+use App\Page;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -46,8 +47,9 @@ class ManageController extends Controller
         $articles = Article::get();
         $blog_info = BlogInfo::first();
         $categories = Category::get();
+        $pages = Page::get();
 
-        return view('articles.manage', compact('articles', 'blog_info', 'categories'));
+        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages'));
     }
 
     /**
@@ -90,6 +92,7 @@ class ManageController extends Controller
     	$blog_info = BlogInfo::first();
     	$articles = Article::get();
         $categories = Category::get();
+        $pages = Page::get();
 
     	if(!$blog_info)
     	{
@@ -100,7 +103,7 @@ class ManageController extends Controller
     		$blog_info->update($request->all());
     	}
 
-        return view('articles.manage', compact('articles', 'blog_info', 'categories'));
+        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages'));
     }
 
     public function updateCategory(Request $request)

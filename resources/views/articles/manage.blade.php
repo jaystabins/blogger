@@ -2,6 +2,7 @@
 
 @section('content')
 	<div class="row main-content">
+		<h3 class="text-center">Blog Posts</h3>
 		<table id="blogPosts" class="table table-striped table-bordered" cellspacing="0" width="100%">
 			<thead>
 	            <tr>
@@ -29,7 +30,33 @@
 		 <a class="btn btn-default" href="{{ url('/blog/create') }}"><i class="fa fa-pencil-square-o fa-lg">Create New Blog Post</i></a>
 	</div>
 	<hr />
-
+	<div class="row main-content">
+		<h3 class="text-center">Pages</h3>
+		<table id="pages" class="table table-striped table-bordered" cellspacing="0" width="100%">
+			<thead>
+	            <tr>
+	                <th>Title</th>
+	                <th>Body</th>
+	                <th>Sidebar</th>
+	                <th>Menu</th>
+	                <th>Edit</th>
+	            </tr>
+        	</thead>
+        	<tbody>
+			 @foreach ($pages as $page)
+			 <tr>
+                <td>{{ $page->title }}</td>
+                <td>{!! substr($page->body, 0, 100) !!}</td>
+                <td>{{ $page->show_sidebar ? 'show' : '' }}</td>
+                <td>{{ $page->show_menu ? 'show' : '' }}</td>
+                <td><a class="btn" href="{{ route('page.edit', ['id' => $page->slug]) }}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
+            </tr>
+			 @endforeach
+			</tbody>
+		 </table>
+		 <a class="btn btn-default" href="{{ url('/page/create') }}"><i class="fa fa-pencil-square-o fa-lg">Create New Page</i></a>
+	</div>
+	<hr />
 	{!! Form::model($blog_info, [ 'route' => 'blog.manage.store', 'id' => 'manage_form']) !!}
 	<div class="row">
 		<div class="panel panel-default">
@@ -118,6 +145,8 @@
 	<script>
 		$(document).ready(function() {
 			$('#blogPosts').DataTable();
+
+			$('#pages').DataTable();
 
 			$('#featured-image').attr('src', $('#featured_image').val());
 

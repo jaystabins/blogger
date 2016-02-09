@@ -73,7 +73,7 @@ class ArticleController extends Controller
 
         $info = DB::table('blog_info')->first();
 
-        if($request->auto_category_menu == '1' || $info->auto_category_menu == 1)
+        if(($request->auto_category_menu == '1' || $info->auto_category_menu == 1) && $request->category_id)
         {
             $category_id = DB::table('article_category')
                             ->select('category_id')
@@ -151,7 +151,7 @@ class ArticleController extends Controller
 
         $info = DB::table('blog_info')->first();
 
-        if($request->auto_category_menu == '1' || $info[0]->auto_category_menu == 1)
+        if(($request->auto_category_menu == '1' || $info->auto_category_menu == 1) && $request->category_list)
         {
             $category_id = DB::table('article_category')
                             ->select('category_id')

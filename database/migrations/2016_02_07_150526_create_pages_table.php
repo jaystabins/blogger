@@ -14,11 +14,12 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('content');
-            $table->boolean('show_in_menu');
+            $table->string('title');
+            $table->text('body');
             $table->boolean('show_sidebar');
-            $table->boolean('active');
+            $table->boolean('show_menu');
+            $table->boolean('show_contact_form');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

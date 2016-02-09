@@ -11,6 +11,7 @@ use Response;
 use App\Article;
 use App\BlogInfo;
 use App\Category;
+use App\Page;
 use Auth;
 use App\User;
 use App\Http\Requests;
@@ -70,6 +71,7 @@ class InstallController extends Controller
         $blog_info = BlogInfo::first();
         $articles = Article::get();
         $categories = Category::get();
+        $pages = Page::get();
 
         if(!$blog_info)
         {
@@ -80,6 +82,6 @@ class InstallController extends Controller
             $blog_info->update($request->all());
         }
 
-        return view('articles.manage', compact('articles', 'blog_info', 'categories'));
+        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages'));
     }
 }

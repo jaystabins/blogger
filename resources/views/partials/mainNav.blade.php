@@ -15,12 +15,11 @@
 				<li {!! Request::is('/') ? 'class="active"' : '' !!}>
 					<a href="{{ url('/') }}">Home</a>
 				</li>
-				<li {!! Request::is('contact') ? 'class="active"' : '' !!}>
-					<a href="{{ url('contact') }}">Contact</a>
-				</li>
-				<li {!! Request::is('about') ? 'class="active"' : '' !!}>
-					<a href="{{ url('about') }}">About</a>
-				</li>
+				@foreach($pageMenuItems as $page)
+					<li {!! Request::is($page->slug) ? 'class="active"' : '' !!}>
+						<a href="{{ url($page->slug) }}">{{ $page->title }}</a>
+					</li>
+				@endforeach
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

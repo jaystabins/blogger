@@ -20,6 +20,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         $this->composeSidebarTags();
         $this->composeBlogInfo();
         $this->composeSidebarMenuCategories();
+        $this->composeNavbarMenu();
     }
 
     /**
@@ -110,10 +111,23 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     private function composeBlogInfo()
     {
-        view()->composer(['app', 'partials.footer', 'articles.index', 'articles.single'], function($view)
+        view()->composer(['app', 'partials.footer', 'articles.index', 'articles.single, pages.index'], function($view)
         {
             $view->with('info', DB::table('blog_info')
                 ->first());
+        });
+    }
+
+    /**
+     * Navar Category info
+     */
+    private function composeNavbarMenu()
+    {
+        view()->composer(['app', 'partials.mainNav'], function($view)
+        {
+            $view->with('pageMenuItems', DB::table('pages')
+                ->where('show_menu', '=', 1)
+                ->get());
         });
     }
 }
