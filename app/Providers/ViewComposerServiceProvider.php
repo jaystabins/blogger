@@ -21,6 +21,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         $this->composeBlogInfo();
         $this->composeSidebarMenuCategories();
         $this->composeNavbarMenu();
+        $this->composeFooterSocialConnect();
     }
 
     /**
@@ -94,13 +95,14 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     private function composeSidebarMenuCategories()
     {
-        view()->composer('partials.sidebar', function($view)
+        view()->composer(['partials.sidebar', 'partials.mainNav'], function($view)
         {
             $view->with('menuCategories', DB::table('categories')
                 ->join('article_category', 'categories.id', '=', 'article_category.category_id')
                 ->join('articles', 'articles.id', '=', 'article_category.article_id')
                 ->where('add_menu', '=', '1')
                 ->where('articles.status', '=', '1')
+                ->groupBy('categories.id')
                 ->get());
         });
     }
@@ -111,7 +113,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     private function composeBlogInfo()
     {
-        view()->composer(['app', 'partials.footer', 'articles.index', 'articles.single, pages.index'], function($view)
+        view()->composer(['app', 'partials.footer', 'articles.index', 'articles.single', 'pages.index', 'articles.partials.articleForm', 'partials.mainNav'], function($view)
         {
             $view->with('info', DB::table('blog_info')
                 ->first());
@@ -128,6 +130,17 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('pageMenuItems', DB::table('pages')
                 ->where('show_menu', '=', 1)
                 ->get());
+        });
+    }
+
+    /**
+     * Footer Social Connect
+     */
+    private function composeFooterSocialConnect()
+    {
+        view()->composer(['app', 'partials.footer', 'articles.manage'], function($view)
+        {
+            $view->with('socialConnect', DB::table('social_connect')->first());
         });
     }
 }

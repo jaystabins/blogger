@@ -12,8 +12,10 @@ use App\Article;
 use App\BlogInfo;
 use App\Category;
 use App\Page;
+use App\SocialConnect;
 use Auth;
 use App\User;
+use App\MailSetting;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -82,6 +84,52 @@ class InstallController extends Controller
             $blog_info->update($request->all());
         }
 
-        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages'));
+        //return redirect('install/mailSettings');
+        return redirect('install/socialConnect');
+    }
+
+    public function showMailSettings()
+    {
+        return view('install.installMailSettings');
+    }
+
+    public function storeMailSettings(Request $request)
+    {
+        $mail = MailSetting::first();
+        
+        if(!$mail)
+            $mail = MailSetting::create($request->all());
+        else
+            $mail->update($request->all());
+
+
+        $blog_info = BlogInfo::first();
+        $articles = Article::get();
+        $categories = Category::get();
+        $pages = Page::get();
+
+        return redirect('blog/manage')->with(compact('articles', 'blog_info', 'categories', 'pages', 'mail'));
+    }
+
+    public function showSocalConnectSettings()
+    {
+        return view('install/installSocial');
+    }
+
+    public function storeSocalConnectSettings(Request $request)
+    {
+        $social = SocialConnect::first();
+
+        if(!$social)
+        {
+            $social = SocialConnect::create($request->all());
+            return redirect('install/mailSettings');
+        }
+        else
+        {
+            $social->update($request->all());
+            return redirect('blog/manage');
+        }
+
     }
 }

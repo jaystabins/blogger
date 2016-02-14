@@ -14,8 +14,13 @@ use App\User;
 use App\BlogInfo;
 use App\Category;
 use App\Page;
+use App\MailSetting;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use Mail;
+use Swift_Mailer;
+use Swift_SmtpTransport;
 
 class ManageController extends Controller
 {
@@ -44,12 +49,13 @@ class ManageController extends Controller
      */
     public function manageArticles()
     {
+        $mail = MailSetting::first();
         $articles = Article::get();
         $blog_info = BlogInfo::first();
         $categories = Category::get();
         $pages = Page::get();
 
-        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages'));
+        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages', 'mail'));
     }
 
     /**
@@ -97,21 +103,61 @@ class ManageController extends Controller
     	if(!$blog_info)
     	{
     		$blog_info = BlogInfo::create($request->all());
+            return view('install.installMailSettings');
     	}
     	else
     	{
     		$blog_info->update($request->all());
+            return redirect('blog/manage')->with(compact('articles', 'blog_info', 'categories', 'pages', 'mail'));
     	}
 
-        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages'));
     }
 
-    public function updateCategory(Request $request)
+    public function storeMailSettings(Request $request)
     {
-        $category = \App\Category::where('id', '=', $request->id)->first();
-        $category->add_menu = $request->checked;
-        $category->save();
+        $mail = MailInfo::first();
 
-        return 'success';
+        if(!$mail)
+            $mail = MailInfo::create($request->all());
+        else
+            $mail->update($request->all());
+
+
+        $blog_info = BlogInfo::first();
+        $articles = Article::get();
+        $categories = Category::get();
+        $pages = Page::get();
+
+        return redirect('articles.manage', compact('articles', 'blog_info', 'categories', 'pages', 'mail'));
+    }
+
+    public function checkMailSettings(Request $request)
+    {
+        try
+        {
+            $transport = Swift_SmtpTransport::newInstance($request->host, $request->port, $request->encryption);
+            $transport->setUsername($request->username);
+            $transport->setPassword($request->password);
+            $mailer = Swift_Mailer::newInstance($transport);
+            $mailer->getTransport()->start();
+
+            return Response::json([
+                'success' => true
+            ], '200');
+        } 
+        catch (Swift_TransportException $e) 
+        {
+            return Response::json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], '500');
+        } 
+        catch (Exception $e) 
+        {
+            return Response::json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], '500');
+        }
     }
 }

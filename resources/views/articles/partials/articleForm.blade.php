@@ -44,14 +44,10 @@
     <small class="text-danger">{{ $errors->first('category_list') }}</small>
 </div>
 
-<div class="form-group" id="hiddenDiv">
+<div class="form-group">
     <div class="checkbox">
-        <label for="auto_category_menu">
-            {!! Form::hidden('auto_category_menu', 0) !!}
-            {!! Form::checkbox('auto_category_menu', true, true, ['id' => 'auto_category_menu']) !!} <b>Add Menu</b>
-        </label>
+        <label><input type="checkbox" {{ (bool)$info->auto_category_menu ? 'checked' : '' }} id="auto_category_menu" name="auto_category_menu">Add To Menu</label>
     </div>
-    <small class="text-danger">{{ $errors->first('add_menu') }}</small>
 </div>
 
 <div class="form-group">
@@ -59,6 +55,17 @@
     {!! Form::select('tag_list[]', $tag_list, (isset($article) ? $article->tags->lists('id')->toArray() : 'tag_list'), ['id' => 'tag_list', 'class' => 'form-control', 'multiple']) !!}
     <small class="text-danger">{{ $errors->first('tag_list') }}</small>
 </div>
+
+<div class="form-group">
+    <div class="checkbox">
+        <label for="show_sharebar">
+            {!! Form::hidden('show_sharebar', 0) !!}
+            {!! Form::checkbox('show_sharebar', true, isset($article) ? $article->show_sharebar : true, ['id' => 'show_sharebar']) !!} <b>Show Sharebar</b>
+        </label>
+    </div>
+    <small class="text-danger">{{ $errors->first('status') }}</small>
+</div>
+
 <div class="form-group">
     {!! Form::label('featured_image', 'Featured Image:') !!}
     <div class="input-group">
@@ -81,6 +88,9 @@
 
 @section('footer')
     <script>
+        if($('#category_list').val() != null)
+            getCategoryMenuCheck();
+
         $('#tag_list').select2({
             placeholder: 'Choose or enter tag(s)',
             tags: true
@@ -146,6 +156,39 @@
 
         function updateImageDisplay(){
             $('#featured-image').attr('src', $('#featured_image').val());
+        }
+
+        $('#category_list').on('change', function(e){
+            getCategoryMenuCheck();
+        });
+
+        function getCategoryMenuCheck(){
+            var option, select = $('#category_list');
+            option = $('#category_list option:selected').text();
+            id = $('#category_list option:selected').val();
+
+            $('#category_list option').each(function(){
+                if(this.text == option){
+                    $.ajax({
+                        url: '/category/checkCategoryMenu',
+                        type: 'POST',        
+                        beforeSend: function (xhr) {
+                            var token = $('meta[name="csrf_token"]').attr('content');
+                            if (token) {
+                                 return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            }
+                        },
+                        data: { id , option },
+                        success: function (data) {
+                            console.log(data);
+                            if(data == '1')
+                                $('#auto_category_menu').prop('checked', true);
+                            else
+                                $('#auto_category_menu').prop('checked', false);
+                        }
+                    })
+                }
+            }) 
         }
     </script>
 @endsection

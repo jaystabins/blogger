@@ -19,7 +19,8 @@ class BlogInfo extends Model
             'email',
             'featured_image',
             'auto_category_menu',
-            'disqus_shortname'
+            'disqus_shortname',
+            'category_navbar'
             ];
 
 }

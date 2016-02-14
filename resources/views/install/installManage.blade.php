@@ -30,10 +30,18 @@
 							    {!! Form::text('email', Auth::user()->email, ['class' => 'form-control', 'required' => 'required']) !!}
 							    <small class="text-danger">{{ $errors->first('email') }}</small>
 							</div>
-							<div class="form-inline">
-			                    <label for="auto_category_menu">Would You Like To Auto Add Categories To Menu?</label>                
-			                    {!! Form::select('auto_category_menu', ['No', 'Yes'], null, ['class' => 'form-control pull-right']) !!}
-			                </div>
+			                <div class="form-group">
+								<div class="form-inline">
+				                    <label for="auto_category_menu">Would You Like To Auto Add Categories To Menu?</label>                
+				                    {!! Form::select('auto_category_menu', ['No', 'Yes'], null, ['class' => 'form-control pull-right']) !!}
+				                </div>
+			            	</div>
+			                <div class="form-group">
+				                <div class="form-inline">
+				                    <label for="category_navbar">Would You Like To Add Categories To Main Navbar?</label>                
+				                    {!! Form::select('category_navbar', ['No', 'Yes'], null, ['class' => 'form-control pull-right']) !!}
+				                </div>
+			            	</div>
 			                <hr />
 			                <div class="form-group">
 							    {!! Form::label('disqus_shortname', 'Disqus Shortname:') !!}

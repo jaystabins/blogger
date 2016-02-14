@@ -20,7 +20,8 @@ class Article extends Model
     	'published_at',
         'featured_image',
     	'slug',
-        'category'
+        'category',
+        'show_sharebar'
     ];
 
     /**

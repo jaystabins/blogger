@@ -15,6 +15,16 @@
 				<li {!! Request::is('/') ? 'class="active"' : '' !!}>
 					<a href="{{ url('/') }}">Home</a>
 				</li>
+				@if($info->category_navbar && $menuCategories)
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+					        @foreach($menuCategories as $category)
+					            <li><a href="{{url('category', $category->name) }}">{{ $category->name }}</a></li>
+					        @endforeach
+						</ul>
+					</li>
+				@endif
 				@foreach($pageMenuItems as $page)
 					<li {!! Request::is($page->slug) ? 'class="active"' : '' !!}>
 						<a href="{{ url($page->slug) }}">{{ $page->title }}</a>

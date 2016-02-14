@@ -2,8 +2,6 @@
 
 @section('content')
 <div class="row main-content">
-	<div class="panel-heading">Blog Settings</div>
-
 	<div class="container-fluid" id="regInfoForm">
 		<div class="row main-content">
 			<div class="col-md-8 col-md-offset-2">

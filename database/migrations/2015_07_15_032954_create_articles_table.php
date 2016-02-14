@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
             $table->boolean('status');
             $table->timestamp('published_at');
             $table->string('slug');
+            $table->boolean('show_sharebar');
             $table->string('featured_image');
             $table->timestamps();
 

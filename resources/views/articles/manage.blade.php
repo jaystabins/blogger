@@ -57,25 +57,44 @@
 		 <a class="btn btn-default" href="{{ url('/page/create') }}"><i class="fa fa-pencil-square-o fa-lg">Create New Page</i></a>
 	</div>
 	<hr />
-	{!! Form::model($blog_info, [ 'route' => 'blog.manage.store', 'id' => 'manage_form']) !!}
 	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-heading">Category Menu</div>
 				<div class="panel-body">
-					<div class="form-inline">
-	                    <label for="auto_category_menu">Would You Like To Auto Add Categories To Menu?</label>                
-	                    {!! Form::select('auto_category_menu', ['No', 'Yes'], null, ['class' => 'form-control pull-right']) !!}
-	                </div>
+					{!! Form::model($blog_info, [ 'route' => 'blog.manage.store', 'id' => 'manage_form']) !!}
+					<div class="form-group">
+						<div class="form-inline">
+		                    <label for="auto_category_menu">Would You Like To Auto Add Categories To Menu?</label>                
+		                    {!! Form::select('auto_category_menu', ['No', 'Yes'], null, ['class' => 'form-control pull-right']) !!}
+		                </div>
+		            </div>
+					<div class="form-group">
+		                <div class="form-inline">
+		                    <label for="category_navbar">Would You Like To Add Categories To Main Navbar?</label>                
+		                    {!! Form::select('category_navbar', ['No', 'Yes'], null, ['class' => 'form-control pull-right']) !!}
+		                </div>
+		            </div>
+	                	<div class="clearfix"></div>
+						{!! Form::submit('Update', ['class' => 'btn btn-default pull-right', 'id' => 'categoreySubmitBtn']) !!}
+						<div class="clearfix"></div>
+					{!! Form::close() !!}
+	                <hr />
 					<div class="col-md-3">
+						<div class="container row">
 						@foreach($categories as $category)
-							<div class="form-group">
-								<div class="checkbox">
-									<label><input type="checkbox" {{ $category->add_menu ? 'checked' : '' }} id="menuId{{ $category->id }}">{{ $category->name }}</label>
+							<div class="col-md-4">
+								<div class="input-group form-group">
+									<span class="input-group-addon">
+										<input type="checkbox" {{ $category->add_menu ? 'checked' : '' }} id="menuId{{ $category->id }}">
+									</span>
+									<input id="categoryTxt{{ $category->id }}" class="form-control" type="text" value="{{ $category->name }}" />
+									<span class="input-group-btn">
+										<div class="btn btn-default" id="btnCategory{{ $category->id }}">Update</div>
+									</span>
 								</div>
 							</div>
 						@endforeach
-					</div>
-					<div class="col-md-3">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -86,7 +105,7 @@
 			<div class="panel-heading">Blog Settings</div>
 
 				<div class="panel-body">
-
+					{!! Form::model($blog_info, [ 'route' => 'blog.manage.store', 'id' => 'manage_form']) !!}
 					<div class="form-group">
 					    {!! Form::label('blog_name', 'Blog Name:') !!}
 					    {!! Form::text('blog_name', null, ['class' => 'form-control']) !!}
@@ -135,6 +154,28 @@
 	</div>
 	{!! Form::close() !!}
 
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">Mail Settings</div>
+			<div class="panel-body">
+				{!! Form::model($mail, [ 'url' => 'install/mailSettings', 'id' => 'install_mail']) !!}
+					@include('manage.partials.mailSettingsForm');
+				{!! Form::close() !!}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">Social Settings</div>
+			<div class="panel-body">
+				{!! Form::model($socialConnect, [ 'url' => 'install/socialConnect', 'id' => 'update_social']) !!}
+					@include('manage.partials.socialConnectForm');
+				{!! Form::close() !!}
+			</div>
+		</div>
+	</div>
+
 	@include('partials/footer')
 	
 @stop
@@ -154,13 +195,14 @@
 	            selectFIleWithCKFinder('featured_image');
 	        });
 
-	        $('input[id^="menuId"]').on('click', function() {
-
+	        //$('input[id^="menuId"]').on('click', function() {
+	        $('body').on('click', 'div[id^="btnCategory"]', function() {
 	        	var id = this.id.match(/\d+/);
 	        	var checked = $('#menuId' + id).is(':checked') ? '1' : '0';
+	        	var name = $('#categoryTxt' + id).val();
 
 	        	$.ajax({
-	        		url: 'updateCategory',
+	        		url: '/category/updateCategory',
 	        		type: 'POST',        
 	        		beforeSend: function (xhr) {
             			var token = $('meta[name="csrf_token"]').attr('content');
@@ -168,7 +210,10 @@
                  			 return xhr.setRequestHeader('X-CSRF-TOKEN', token);
 			            }
 			        },
-			        data: { id , checked }
+			        data: { id , checked, name },
+			        success: function(){
+			        	alert('Category Successfully Updated');
+			        }
 	        	})
 	        });
 

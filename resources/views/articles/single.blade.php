@@ -27,6 +27,10 @@
 						<p><a href="{{ route('blog.edit', ['slug' => $article->slug]) }}">Edit Article</a></p>
 				@endif
 
+				@if($article->show_sharebar)
+					@include('partials.socialSharebar')
+				@endif
+
 				@unless($article->tags->isEmpty())
 					<p>
 						<big>Tags:</big>

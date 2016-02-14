@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth', ['except' => ['index', 'show', 'showMonth']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'showMonth', 'search']]);
     }
 
     /**
@@ -71,20 +71,15 @@ class ArticleController extends Controller
         $this->syncTags($article, (array) $request->input('tag_list'));
         $this->syncCategories($article, (array) $request->input('category_list'));
 
-        $info = DB::table('blog_info')->first();
+        $category = Category::getCategoryByArticle($article->id);
 
-        if(($request->auto_category_menu == '1' || $info->auto_category_menu == 1) && $request->category_id)
+        if(!is_null($category))
         {
-            $category_id = DB::table('article_category')
-                            ->select('category_id')
-                            ->where('article_id', '=', $article->id)
-                            ->get();
+            $info = DB::table('blog_info')->first();
 
-            $category = Category::where('id', '=', $category_id[0]->category_id)
-                            ->first();
+            $addMenu = $request->auto_category_menu == 'on' ? 1 : 0;
 
-            $category->add_menu = 1;
-            $category->save();
+            Category::setCategoryMenu($category->category_id, $addMenu);
         }
 
         return redirect('/');
@@ -149,20 +144,15 @@ class ArticleController extends Controller
         //todo: probably rethink this logic add some helper function to update slug or remove from model
         $article = Article::findOrFail($request->id);
 
-        $info = DB::table('blog_info')->first();
+        $category = Category::getCategoryByArticle($article->id);
 
-        if(($request->auto_category_menu == '1' || $info->auto_category_menu == 1) && $request->category_list)
+        if(!is_null($category))
         {
-            $category_id = DB::table('article_category')
-                            ->select('category_id')
-                            ->where('article_id', '=', $article->id)
-                            ->get();
+            $info = DB::table('blog_info')->first();
 
-            $category = Category::where('id', '=', $category_id[0]->category_id)
-                            ->first();
+            $addMenu = $request->auto_category_menu == 'on' ? 1 : 0;
 
-            $category->add_menu = 1;
-            $category->save();
+            Category::setCategoryMenu($category->category_id, $addMenu);
         }
 
         return redirect(route('blog.show', ['slug' => $article->slug]));
@@ -215,11 +205,14 @@ class ArticleController extends Controller
     {
         $articles = Article::join('article_tag', 'articles.id', '=', 'article_tag.article_id')
                         ->join('tags', 'tags.id', '=', 'article_tag.tag_id')
+                        ->join('article_category', 'articles.id', '=', 'article_category.article_id')
+                        ->join('categories', 'categories.id', '=', 'article_category.category_id')
                         ->where('title', 'LIKE', "%$request->term%")
                         ->orWhere('subtitle', 'LIKE', "%$request->term%")
                         ->orWhere('body', 'LIKE', "%$request->term%")
                         ->orWhere('slug', 'LIKE', "%$request->term%")
-                        ->orWhere('name', 'LIKE', "%$request->term%")
+                        ->orWhere('tags.name', 'LIKE', "%$request->term%")
+                        ->orWhere('categories.name', 'LIKE', "%$request->term%")
                         ->groupBy('articles.slug')
                         ->published()
                         ->paginate(5);

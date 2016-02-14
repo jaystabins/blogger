@@ -11,11 +11,11 @@
 
 		<h1 class="text-center">{{ $page->title }}</h1>
 
+		{!! $page->body !!}
+
 		@if($page->show_contact_form)
 			@include('pages.partials.contactForm')
 		@endif
-
-		{!! $page->body !!}
 
 	</div>
 

@@ -1,34 +1,9 @@
 <!-- Footer -->
 <footer>
     <div class="container">
-        <div class="row">
+        <div class="row social">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    <li>
-                        <a href="https://twitter.com/Jaybinski" target="_blank">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/jason.stabins" target="_blank">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/jaystabins" target="_blank">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
+                @include('partials.socialConnect')
                 <p class="copyright text-muted text-center">Copyright &copy; {{ $info->blog_name }} <?php echo date('Y'); ?></p>
             </div>
         </div>
