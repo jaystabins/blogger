@@ -68,10 +68,10 @@
 		        },
 		        data: formData,
 		        success: function (data) {
-                        alert(data.success);
+                        swal("Connection OK", "These settings work", "success");
                 },
                 error: function(xhr, ajaxOptions, thrownError){
-                		alert(xhr.statusText);
+                		swal("Oops...", "Something went wrong!", "error");
                 }
 	        })
 		});

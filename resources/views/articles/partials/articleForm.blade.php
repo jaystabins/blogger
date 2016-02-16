@@ -115,14 +115,33 @@
             $('#featured-image').attr('src', imgPath);
         });
 
-        function ConfirmDelete()
-        {
-            var x = confirm("Are you sure you want to delete?");
-            if (x)
-                return true;
-            else
-                return false;
-        }
+        $('button#deleteBtn').on('click', function(){
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this post!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes, I am sure!',
+                cancelButtonText: "No, cancel it!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    swal({
+                        title: 'Deleted!',
+                        text: 'Post have been deleted!',
+                        type: 'success'
+                    }, function() {
+                        $("#frmDelete").submit();
+                    });
+                    
+                } else {
+                    swal("Cancelled", "Your post has not been deleted", "error");
+                }
+            });
+        });
 
         CKEDITOR.replace('body' ,{
             filebrowserBrowseUrl: '/ckfinder/ckfinder.html',

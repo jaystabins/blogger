@@ -18,9 +18,9 @@
 					@endunless
 					{{ ' on ' . date("F j, Y", strtotime($article->published_at)) . " by " . $article->user->name  }}
 				</p>
-				<p>
+				<div class="article-body">
 					{!! $article->body !!}
-				</p>
+				</div>
 
 				<div class="clearfix"></div>
 				@if(Auth::check() && Auth::id() == $article->user_id)

@@ -4,6 +4,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-facebook"></i></span>
 	    {!! Form::text('facebook_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('facebook_active', 0) !!}
 			{!! Form::checkbox('facebook_active', true, isset($socialConnect) ? $socialConnect->facebook_active : false, ['id' => 'facebook_active']) !!}
 		</span>
 	</div>
@@ -12,6 +13,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-youtube"></i></span>
 	    {!! Form::text('youtube_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('youtube_active', 0) !!}
 			{!! Form::checkbox('youtube_active', true, isset($socialConnect) ? $socialConnect->youtube_active : false, ['id' => 'youtube_active']) !!}
 		</span>
 	</div>
@@ -20,6 +22,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-twitter"></i></span>
 	    {!! Form::text('twitter_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('twitter_active', 0) !!}
 			{!! Form::checkbox('twitter_active', true, isset($socialConnect) ? $socialConnect->twitter_active : false, ['id' => 'twitter_active']) !!}
 		</span>
 	</div>
@@ -28,6 +31,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
 	    {!! Form::text('googlePlus_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('googlePluse_active', 0) !!}
 			{!! Form::checkbox('googlePluse_active', true, isset($socialConnect) ? $socialConnect->googlePlus_active : false, ['id' => 'googlePluse_active']) !!}
 		</span>
 	</div>
@@ -36,6 +40,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
 	    {!! Form::text('linkedin_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('linkedin_active', 0) !!}
 			{!! Form::checkbox('linkedin_active', true, isset($socialConnect) ? $socialConnect->linkedin_active : false, ['id' => 'linkedin_active']) !!}
 		</span>
 	</div>
@@ -44,6 +49,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-pinterest"></i></span>
 	    {!! Form::text('pinterest_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('pinterest_url', 0) !!}
 			{!! Form::checkbox('pinterest_url', true, isset($socialConnect) ? $socialConnect->pinterest_url : false, ['id' => 'pinterest_url']) !!}
 		</span>
 	</div>
@@ -52,6 +58,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-instagram"></i></span>
 	    {!! Form::text('instagram_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('instagram_active', 0) !!}
 			{!! Form::checkbox('instagram_active', true, isset($socialConnect) ? $socialConnect->instagram_active : false, ['id' => 'instagram_active']) !!}
 		</span>
 	</div>
@@ -60,6 +67,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-github"></i></span>
 	    {!! Form::text('github_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('github_active', 0) !!}
 			{!! Form::checkbox('github_active', true, isset($socialConnect) ? $socialConnect->github_active : false, ['id' => 'github_active']) !!}
 		</span>
 	</div>
@@ -68,6 +76,7 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-rss"></i></span>
 	    {!! Form::text('rss_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
+        	{!! Form::hidden('rss_active', 0) !!}
 			{!! Form::checkbox('rss_active', true, isset($socialConnect) ? $socialConnect->rss_active : false, ['id' => 'rss_active']) !!}
 		</span>
 	</div>

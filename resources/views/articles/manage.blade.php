@@ -146,7 +146,7 @@
 					    </div>
 					    <small class="text-danger">{{ $errors->first('body') }}</small>
 
-					    <img src="" id="featured-image">
+					    <img src="" id="featured-image" class="img-responsive">
 					</div>
 					{!! Form::submit('Update', ['class' => 'btn btn-default pull-right', 'id' => 'submitBtn']) !!}
 				</div>
@@ -159,7 +159,7 @@
 			<div class="panel-heading">Mail Settings</div>
 			<div class="panel-body">
 				{!! Form::model($mail, [ 'url' => 'install/mailSettings', 'id' => 'install_mail']) !!}
-					@include('manage.partials.mailSettingsForm');
+					@include('manage.partials.mailSettingsForm')
 				{!! Form::close() !!}
 			</div>
 		</div>
@@ -170,7 +170,7 @@
 			<div class="panel-heading">Social Settings</div>
 			<div class="panel-body">
 				{!! Form::model($socialConnect, [ 'url' => 'install/socialConnect', 'id' => 'update_social']) !!}
-					@include('manage.partials.socialConnectForm');
+					@include('manage.partials.socialConnectForm')
 				{!! Form::close() !!}
 			</div>
 		</div>
@@ -212,7 +212,7 @@
 			        },
 			        data: { id , checked, name },
 			        success: function(){
-			        	alert('Category Successfully Updated');
+			        	swal('Success', 'Category Successfully Updated', 'success');
 			        }
 	        	})
 	        });

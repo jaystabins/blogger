@@ -159,6 +159,8 @@ class PagesController extends Controller
 		if(!$sent)
             abort(503);
 
+        alert()->success('Your email has been delivered', 'Success!');
+
 		return redirect('/');
 	}
 

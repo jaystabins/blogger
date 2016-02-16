@@ -14,10 +14,10 @@
 				
 					{!! Form::close() !!}
 
-					{!! Form::open(['route' => ['blog.destroy', $article->slug], 'method' => 'DELETE', 'onsubmit' => 'return ConfirmDelete()']) !!}
+					{!! Form::open(['route' => ['blog.destroy', $article->slug], 'method' => 'DELETE', 'id' => 'frmDelete']) !!}
 
 						{!! Form::hidden('slug', $article->slug) !!}
-						{!! Form::button('Delete Article <i class="fa fa-trash-o"></i>', ['onsubmit' => 'return ConfirmDelete()', 'type' => 'submit', 'class' => 'btn btn-danger pull-right', 'id' => 'deleteBtn']) !!}
+						{!! Form::button('Delete Article <i class="fa fa-trash-o"></i>', ['class' => 'btn btn-danger pull-right', 'id' => 'deleteBtn']) !!}
 
 					{!! Form::close() !!}
 

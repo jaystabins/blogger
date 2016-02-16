@@ -24,8 +24,8 @@
 	<!-- for Twitter -->          
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:title" content="{{ isset($article->title) && !isset($articles) ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}" />
-	<meta name="twitter:description" content="" />
-	<meta name="twitter:image" content="" />
+	<meta name="twitter:description" content="{{ isset($article->subtitle) && !isset($articles) ? $article->subtitle : $info->tagline }}" />
+	<meta name="twitter:image" content="{{ isset($article->featured_image) && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image }}" />
 
 	<meta name="csrf_token" content="{{ csrf_token() }}" />
 
@@ -42,8 +42,12 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	
+	<!-- Sweet Alert -->
+	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 
 	<link rel="stylesheet"href="{{ asset('/css/app.css') }}"/>
+
 
 </head>
 <body>
@@ -73,6 +77,11 @@
 
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+	<!-- Sweet Alert -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+	@include('sweet::alert')
+	
 	@yield('footer')
 </body>
 </html>

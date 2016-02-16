@@ -1,6 +1,9 @@
 .main-content{
   margin-top: 80px;
 }
+.container{
+  max-width: 1000px;
+}
 .image {
   position: relative;
   width: 100% !important;
@@ -11,7 +14,7 @@
   width:100%;
   overflow: hidden;
 }
-h2 { 
+article h2 { 
    position: absolute; 
    top: 100px; 
    left: 0; 
@@ -42,6 +45,10 @@ h2 span {
 
 .article-info {
   font: bold 15px/25px Helvetica, Sans-Serif;
+}
+
+.article-body img{
+  padding: 10px;
 }
 
 
