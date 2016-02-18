@@ -40,14 +40,14 @@ class InstallController extends Controller
 
         if($user && !Auth::check())
         {
-            return view('Install.installLogin');
+            return view('install.installLogin');
         }
         elseif($user && Auth::check())
         {
-            return view('Install.installManage');
+            return view('install.installManage');
         }
 
-        return view('Install.installRegister');
+        return view('install.installRegister');
     }
 
     /**

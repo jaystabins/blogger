@@ -8,6 +8,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Register</div>
 					<div class="panel-body">
+						<p class="text-center">Please create an admin account for your website.</p>
 						<form class="form-horizontal" id="regForm" role="form" method="POST" action="{{ url('/install/register') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 

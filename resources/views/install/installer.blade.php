@@ -13,6 +13,9 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
+	<!-- Sweet Alert -->
+	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
+
 	<link rel="stylesheet"href="{{ asset('/css/app.css') }}"/>
 
 </head>
@@ -32,6 +35,9 @@
 
 	<!-- CKFinder -->
 	<script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
+	
+	<!-- Sweet Alert -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
 	@yield('footer')
 </body>

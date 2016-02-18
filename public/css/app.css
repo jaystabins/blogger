@@ -1,3 +1,21 @@
+body {
+font-family: 'Vollkorn', serif;
+font-size: 18px;
+}
+a {
+  text-decoration: none;
+  color: #903;
+}
+a:hover{
+  text-decoration: none;
+  font-weight: bold;
+  color: #903;
+}
+
+.navbar-brand {
+  font-size: 25px;
+  font-weight: bold;
+}
 .main-content{
   margin-top: 80px;
 }
@@ -23,8 +41,9 @@ article h2 {
 
 h2 span { 
    color: white !important; 
-   font: bold 24px/45px Helvetica, Sans-Serif; 
-   letter-spacing: -1px;  
+   font: bold;/** Helvetica, Sans-Serif; **/
+   letter-spacing: -1px; 
+   line-height: 60px; 
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
    padding: 10px; 
@@ -44,13 +63,23 @@ h2 span {
 }
 
 .article-info {
-  font: bold 15px/25px Helvetica, Sans-Serif;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: right;
 }
 
 .article-body img{
   padding: 10px;
 }
 
+.article-body:first-letter{
+  float: left; color: #903; 
+  font-size: 30px; 
+  line-height: 15px; 
+  padding-top: 4px;  
+  padding-left: 3px; 
+  font-family: Georgia; 
+}
 
 /* Social Media Icons */
 .social-share ul, .social ul{

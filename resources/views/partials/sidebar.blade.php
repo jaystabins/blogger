@@ -40,7 +40,7 @@
     </div>
 
     <div class="sidebar-item">
-        <h4>Search Blog</h4>
+        <h4>Search Site</h4>
         <hr>
             {!! Form::open([ 'route' => 'blog.search', 'id' => 'article_form']) !!}
             <div class="form-group">
