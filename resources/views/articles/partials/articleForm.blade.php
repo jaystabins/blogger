@@ -76,7 +76,7 @@
     </div>
     <small class="text-danger">{{ $errors->first('body') }}</small>
 
-    <img src="" id="featured-image">
+    <img src="" id="featured-image" class="img-responsive">
 </div>
 
 @if(isset($article))
