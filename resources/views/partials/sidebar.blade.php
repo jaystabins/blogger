@@ -25,7 +25,6 @@
     			<a href="{{ url('blog', $post->slug) }}">
     				{{ $post->title }}
     			</a>
-    			<p>{{ $post->subtitle }}</p>
     		</article>
     	@endforeach
     </div>

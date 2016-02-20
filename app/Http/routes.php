@@ -32,6 +32,7 @@ Route::post('install/socialConnect', 'Install\InstallController@storeSocalConnec
  * Manage Blog 
  */
 Route::post('manage/checkMailSettings', 'ManageController@checkMailSettings');
+Route::post('manage/user', 'ManageController@updateUser');
 
 /**
  * Main Page Routes

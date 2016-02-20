@@ -10,12 +10,9 @@ use App\Http\Controllers\Controller;
 
 use App\Page;
 use App\MailSetting;
-use DB;
+use App\User;
 
-use Config;
 use Mail;
-use Swift_Mailer;
-use Swift_SmtpTransport;
 
 class PagesController extends Controller
 {
@@ -62,6 +59,8 @@ class PagesController extends Controller
 	{
         $page = Page::create($request->all());
 
+        alert()->success('Page has been created!', 'Success!');
+
 		return view('pages.index', compact('page'));
 	}
 
@@ -93,6 +92,8 @@ class PagesController extends Controller
 
         $page->delete();
 
+        alert()->success('Page Has Been Deleted!', 'Success!');
+
         return redirect('/');
     }
 
@@ -109,55 +110,25 @@ class PagesController extends Controller
 
     	$page->save();
 
+    	alert()->success('Page has been updated!', 'Success!');
+
     	return redirect($page->slug);
     }
 
     public function sendContactMail(Request $request)
     {
-    	$mail = DB::table('mail_settings')->first();
+	    $m = MailSetting::first();
 
-    	$config = array(
-    		'driver' => $mail->driver,
-	        'host' => $mail->host,
-	        'port' => $mail->port,
-	        'from' => array('address' => $mail->from_address, 'name' => $mail->from_name),
-	        'encryption' => $mail->encryption,
-	        'username' => $mail->username,
-	        'password' => MailSetting::getPasswordAttribute($mail->password),
-	        'sendmail' => '/usr/sbin/sendmail -bs',
-	        'pretend' => false
-        );
-
-	    Config::set('mail',$config);
-
-	    // extract config
-	    extract(Config::get('mail'));
-
-	    // create new mailer with new settings
-	    $transport = Swift_SmtpTransport::newInstance($host, $port);
-	    // set encryption
-	    if (isset($encryption)) $transport->setEncryption($encryption);
-	    // set username and password
-	    if (isset($username))
-	    {
-	        $transport->setUsername($username);
-	        $transport->setPassword($password);
-	    }
-	    // set new swift mailer
-	    Mail::setSwiftMailer(new Swift_Mailer($transport));
-	    // set from name and address
-	    if (is_array($from) && isset($from['address']))
-	    {
-	        Mail::alwaysFrom($from['address'], $from['name']);
-	    }
-
-    	$sent = Mail::send('emails.contact', $request->all(), function($message) use ($config)
+    	$sent = Mail::send('emails.contact', $request->all(), function($message) use ($m)
 		{
-			$message->to($config['from']['address'])->subject('New Blog Message From : ' . $config['from']['name']);
+			$message->to($m->from_address, $m->from_name)->subject('New Blog Message From : ' . $m->from_name);
 		});	
 
 		if(!$sent)
-            abort(503);
+		{
+			alert()->error('There was a problem sending your mail, please try again', 'Error!');
+            return redirect()->back()->withInput();
+        }
 
         alert()->success('Your email has been delivered', 'Success!');
 

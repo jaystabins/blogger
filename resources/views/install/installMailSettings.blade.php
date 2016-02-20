@@ -8,7 +8,7 @@
 				<div class="panel-heading">Mail Settings</div>
 				<div class="panel-body">
 					<div class="text-center">
-						<p>These settings are for using the built in contact us page. If you are not planning on using this feature, you can skip this step</p>
+						<p>Set up mail settings here. If no mail settings are set, you will not be able to send passowrd resets or use the built in contact form.</p>
 					</div>
 					{!! Form::open([ 'url' => 'install/mailSettings', 'id' => 'install_mail']) !!}
 						@include('manage.partials.mailSettingsForm');

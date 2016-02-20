@@ -82,6 +82,8 @@ class ArticleController extends Controller
             Category::setCategoryMenu($category->category_id, $addMenu);
         }
 
+        alert()->success('Post Created Successfully!', 'Success!');
+
         return redirect('/');
     }
 
@@ -155,6 +157,8 @@ class ArticleController extends Controller
             Category::setCategoryMenu($category->category_id, $addMenu);
         }
 
+        alert()->success('Post has been updated!', 'Success!');
+
         return redirect(route('blog.show', ['slug' => $article->slug]));
     }
 
@@ -172,6 +176,8 @@ class ArticleController extends Controller
             abort(404);
 
         $article->delete();
+
+        alert()->success('Post Has Been Deleted!', 'Success!');
 
         return redirect('/');
     }

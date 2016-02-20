@@ -129,14 +129,7 @@
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    swal({
-                        title: 'Deleted!',
-                        text: 'Post have been deleted!',
-                        type: 'success'
-                    }, function() {
-                        $("#frmDelete").submit();
-                    });
-                    
+                    $("#frmDelete").submit();
                 } else {
                     swal("Cancelled", "Your post has not been deleted", "error");
                 }
@@ -200,7 +193,7 @@
                         data: { id , option },
                         success: function (data) {
                             console.log(data);
-                            if(data == '1')
+                            if(data == '1' || '{{ (bool)$info->auto_category_menu }}')
                                 $('#auto_category_menu').prop('checked', true);
                             else
                                 $('#auto_category_menu').prop('checked', false);

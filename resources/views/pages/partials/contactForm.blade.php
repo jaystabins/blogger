@@ -13,7 +13,7 @@
             <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
           </div>
           <div class="form-group">
-            <textarea name="bodyMessage" class="form-control" type="textarea" id="bodyMessage" placeholder="Message" maxlength="140" rows="7"></textarea>                
+            <textarea name="bodyMessage" class="form-control" type="textarea" id="bodyMessage" placeholder="Message" maxlength="140" rows="7" required></textarea>                
           </div>
           {!! Form::submit('Send Mail', ['class' => 'btn btn-default pull-right', 'id' => 'submitBtn']) !!}
       {!! Form::close() !!}

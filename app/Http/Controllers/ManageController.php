@@ -54,8 +54,9 @@ class ManageController extends Controller
         $blog_info = BlogInfo::first();
         $categories = Category::get();
         $pages = Page::get();
+        $user = User::first();
 
-        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages', 'mail'));
+        return view('articles.manage', compact('articles', 'blog_info', 'categories', 'pages', 'mail', 'user'));
     }
 
     /**
@@ -99,6 +100,9 @@ class ManageController extends Controller
     	$articles = Article::get();
         $categories = Category::get();
         $pages = Page::get();
+        $user = User::first();
+
+        alert()->success('Blog Info Has Been Updated!', 'Success!');
 
     	if(!$blog_info)
     	{
@@ -108,7 +112,7 @@ class ManageController extends Controller
     	else
     	{
     		$blog_info->update($request->all());
-            return redirect('blog/manage')->with(compact('articles', 'blog_info', 'categories', 'pages', 'mail'));
+            return redirect('blog/manage')->with(compact('articles', 'blog_info', 'categories', 'pages', 'mail', 'user'));
     	}
 
     }
@@ -127,8 +131,11 @@ class ManageController extends Controller
         $articles = Article::get();
         $categories = Category::get();
         $pages = Page::get();
+        $user = User::first();
 
-        return redirect('articles.manage', compact('articles', 'blog_info', 'categories', 'pages', 'mail'));
+        alert()->success('Mail Settings Have Been Updated!', 'Success!');
+
+        return redirect('articles.manage', compact('articles', 'blog_info', 'categories', 'pages', 'mail', 'user'));
     }
 
     public function checkMailSettings(Request $request)
@@ -159,5 +166,41 @@ class ManageController extends Controller
                 'error' => $e->getMessage()
             ], '500');
         }
+    }
+
+    public function updateUser(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $user = Auth::user();
+
+        if(Auth::attempt(['email' => $user->email, 'password' => $request->password]))
+        {
+            if($request->new_password != '')
+            {
+                $this->validate($request, [
+                    'new_password' => 'required|same:new_password_again',
+                    'new_password_again' => 'required'
+                ]);
+                $user->password = bcrypt($request->new_password);
+            }
+            $user->name = $request->name;
+            $user->email = $request->email;
+
+            $user->save();
+
+
+            alert()->success('User has been updated!', 'Success!');
+
+            return redirect()->back();
+        }
+
+        alert()->error('Incorrect Email or Password', 'Yikes!');
+
+        return redirect()->back();
     }
 }

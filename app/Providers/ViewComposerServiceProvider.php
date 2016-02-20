@@ -82,6 +82,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 ->join('articles', 'article_tag.article_id', '=', 'articles.id')
                 ->select(DB::raw('tags.name, COUNT(tags.name) total'))
                 ->where('articles.status', '=', '1')
+                ->where('articles.published_at', '<=', Carbon::now())
                 ->groupBy('tags.name')
                 ->orderBy('total', 'DESC')
                 ->take(5)
@@ -102,6 +103,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 ->join('articles', 'articles.id', '=', 'article_category.article_id')
                 ->where('add_menu', '=', '1')
                 ->where('articles.status', '=', '1')
+                ->where('articles.published_at', '<=', Carbon::now())
                 ->groupBy('categories.id')
                 ->get());
         });

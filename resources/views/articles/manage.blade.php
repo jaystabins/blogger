@@ -10,6 +10,7 @@
 	    	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
 	    	<li role="presentation"><a href="#mail" aria-controls="mail" role="tab" data-toggle="tab">Mail Settings</a></li>
 	    	<li role="presentation"><a href="#social" aria-controls="social" role="tab" data-toggle="tab">Social</a></li>
+	    	<li role="presentation"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">User</a></li>
 	  	</ul>
 
 	  	<div class="tab-content">
@@ -178,6 +179,16 @@
 						<div class="panel-body">
 							{!! Form::model($socialConnect, [ 'url' => 'install/socialConnect', 'id' => 'update_social']) !!}
 								@include('manage.partials.socialConnectForm')
+							{!! Form::close() !!}
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="user">
+					<div class="panel panel-default">
+						<h3 class="text-center">User Settings</h3>
+						<div class="panel-body">
+							{!! Form::model($user, [ 'url' => 'manage/user', 'id' => 'password_reset']) !!}
+								@include('manage.partials.userUpdate')
 							{!! Form::close() !!}
 						</div>
 					</div>

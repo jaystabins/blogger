@@ -7,8 +7,12 @@
 			<article> 
 				<div class="image">
 					<img src="{{ $article->featured_image != "" ? $article->featured_image : $info->featured_image }}" alt="" />
-					<h2><span>{{ $article->title }}</span><br />
-					<span>{{ $article->subtitle }}</span></h2>
+					<h2>
+						<span>{{ $article->title }}</span><br />
+						@if($article->subtitle != '')
+							<span>{{ $article->subtitle }}</span>
+						@endif
+					</h2>
 				</div>
 				<p class="article-info">Posted In 
 					@unless($article->categories->isEmpty())
