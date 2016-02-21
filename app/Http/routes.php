@@ -35,6 +35,10 @@ Route::post('manage/checkMailSettings', 'ManageController@checkMailSettings');
 Route::post('manage/user', 'ManageController@updateUser');
 
 /**
+ * Manage Blog 
+ */
+Route::get('rss', 'ArticleController@rss');
+/**
  * Main Page Routes
  */
 Route::get('{page}', 'PagesController@index');

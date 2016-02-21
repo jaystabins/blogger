@@ -29,5 +29,7 @@
 		@include('partials.sidebar')
 
 	</div>
+	
+	@include('partials/footer')
 
 @endsection

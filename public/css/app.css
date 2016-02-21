@@ -43,10 +43,10 @@ h2 span {
    color: white !important; 
    font: bold;
    letter-spacing: -1px; 
-   line-height: 60px; 
+   line-height: 52px; 
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
-   padding: 10px; 
+   padding: 5px; 
 }
 
 .blog-sidebar hr{

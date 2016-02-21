@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show', 'showMonth', 'search']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'showMonth', 'search', 'rss']]);
     }
 
     /**
@@ -295,5 +295,12 @@ class ArticleController extends Controller
         }
 
         return $currentCategories;
+    }
+
+    public function rss(RssFeed $feed)
+    {
+        $rss = $feed->getRSS();
+
+        return response($rss)->header('Contenet-type', 'application/rss+xml');
     }
 }
