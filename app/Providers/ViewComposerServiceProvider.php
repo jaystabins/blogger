@@ -105,6 +105,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 ->where('articles.status', '=', '1')
                 ->where('articles.published_at', '<=', Carbon::now())
                 ->groupBy('categories.id')
+                ->orderBy('categories.name', 'ASC')
                 ->get());
         });
     }

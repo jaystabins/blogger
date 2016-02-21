@@ -38,4 +38,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	//imageuploader
 	//config.extraPlugins = 'imageuploader';
+	
+	//allow any class and inline style
+	config.extraAllowedContent = '*(*);*{*}';
 };

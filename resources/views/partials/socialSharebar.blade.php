@@ -23,3 +23,20 @@
 	    </li>
 	</ul>
 </div>	
+
+
+@section('footer')
+	@parent
+	<script>
+		$('.social-share a').on('click', function(e){
+			var link = this.href;
+			if(link.indexOf('mail')){
+				e.preventDefault();
+				var left =(screen.width/2-250);
+				var top = (screen.height/2-250);
+				window.open(link, 'mywin', 'left='+left+',top='+top+',width=500, height=500,toolbar=1,resizable=0');
+			}
+		});
+	</script>
+
+@endsection
