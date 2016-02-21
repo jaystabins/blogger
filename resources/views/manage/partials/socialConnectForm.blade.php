@@ -75,6 +75,7 @@
 	<div class="input-group form-group">
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-rss"></i></span>
 	    {!! Form::text('rss_url', url('/rss'), ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+	    {!! Form::hidden('rss_url', url('/rss')) !!}
 		<span class="input-group-addon">
         	{!! Form::hidden('rss_active', 0) !!}
 			{!! Form::checkbox('rss_active', true, isset($socialConnect) ? $socialConnect->rss_active : false, ['id' => 'rss_active']) !!}
