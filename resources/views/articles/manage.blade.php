@@ -151,7 +151,7 @@
 							    <div class="input-group">
 							        {!! Form::text('featured_image', null, ['id' => 'featured_image', 'class' => 'form-control', 'readonly' => 'true']) !!}
 							        <span class="input-group-btn">
-							            <a class="btn btn-default" id="ckfinder-popup">Browse Server</a>
+							            <a class="btn btn-default" id="ckfinder-popup-featured">Browse Server</a>
 							        </span>
 							    </div>
 							    <small class="text-danger">{{ $errors->first('body') }}</small>
@@ -225,8 +225,12 @@
 
 			$('#featured-image').attr('src', $('#featured_image').val());
 
-	        $("#ckfinder-popup").click(function(){
+	        $("#ckfinder-popup-featured").click(function(){
 	            selectFIleWithCKFinder('featured_image');
+	        });
+
+	        $("#ckfinder-popup-favicon").click(function(){
+	            selectFIleWithCKFinder('favicon_image');
 	        });
 
 	        $('#manageTabs a').click(function (e) {
