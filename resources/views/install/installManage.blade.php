@@ -67,12 +67,26 @@
 							    <div class="input-group">
 							        {!! Form::text('featured_image', null, ['id' => 'featured_image', 'class' => 'form-control', 'readonly' => 'true', 'required' => 'required']) !!}
 							        <span class="input-group-btn">
-							            <a class="btn btn-default" id="ckfinder-popup">Browse Server</a>
+							            <a class="btn btn-default" id="ckfinder-popup-featured">Browse Server</a>
 							        </span>
 							    </div>
 							    <small class="text-danger">{{ $errors->first('featured_image') }}</small>
 
 							    <img src="" id="featured-image" class="img-responsive">
+							</div>
+							<hr />
+
+							<p class="text-center">Select a favicon for the site.</p>
+							<div class="form-group">
+							    {!! Form::label('favicon_image', 'Favicon:') !!}
+							    <div class="input-group">
+							        {!! Form::text('favicon_image', null, ['id' => 'favicon_image', 'class' => 'form-control', 'readonly' => 'true', 'required' => 'required']) !!}
+							        <span class="input-group-btn">
+							            <a class="btn btn-default" id="ckfinder-popup-favicon">Browse Server</a>
+							        </span>
+							    </div>
+							    <small class="text-danger">{{ $errors->first('favicon_image') }}</small>
+
 							</div>
 							{!! Form::submit('Install', ['class' => 'btn btn-default pull-right', 'id' => 'submitBtn']) !!}
 						</div>
@@ -93,8 +107,12 @@
 	<script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
     <script>
 		$(document).ready(function() {
-	        $("#ckfinder-popup").click(function(){
+	        $("#ckfinder-popup-featured").click(function(){
 	            selectFIleWithCKFinder('featured_image');
+	        });
+
+	        $("#ckfinder-popup-favicon").click(function(){
+	            selectFIleWithCKFinder('favicon_image');
 	        });
 
 	        function selectFIleWithCKFinder( elementId ) {

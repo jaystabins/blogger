@@ -6,13 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ isset($article->title) && !isset($articles) ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}</title>
 
+	<link rel="shortcut icon" type="image/png" href="{{ $info->favicon_image }}" />
+
 	<link rel="alternate" type="application/rss+xml" href="{{ url('rss') }}" title="RSS Feed {{ $info->blog_name }}">
 
 	<!-- for Google -->
 	<meta name="description" content="{{ isset($article->excerpt) && !isset($articles)  ? $article->excerpt : $info->tagline }}" />
 	<meta name="keywords" content="{{ isset($article->title) && !isset($articles)  ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}" />
 
-	<meta name="author" content="{{ $info->author }}" />
 	<meta name="copyright" content="Copyright {{ $info->blog_name }} <?php echo date('Y'); ?>" />
 	<meta name="application-name" content="{{ $info->blog_name }}" />
 

@@ -25,7 +25,7 @@ a:hover{
 .image {
   position: relative;
   width: 100% !important;
-  height: 250px;
+  max-height: 250px;
   overflow: hidden;
 }
 .image img {
@@ -38,7 +38,9 @@ article h2 {
    left: 0; 
    width: 100%; 
 }
-
+span small{
+  color: white !important;
+}
 h2 span { 
    color: white !important; 
    font: bold;
@@ -47,6 +49,10 @@ h2 span {
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
    padding: 5px; 
+}
+/** Hack to prevent the overflow of select 2 dropdown to not go off page */
+.select2-hidden-accessible{
+  width:10px;
 }
 
 .blog-sidebar hr{
@@ -72,13 +78,12 @@ h2 span {
   padding: 10px;
 }
 
-.article-body:first-letter{
-  float: left; color: #903; 
-  font-size: 30px; 
-  line-height: 15px; 
-  padding-top: 4px;  
-  padding-left: 3px; 
-  font-family: Georgia; 
+.article-header h1 {
+  font-size: 1.5em;
+}
+.article-header h3{
+  margin-top: -15px;
+  margin-bottom: 30px;
 }
 
 /* Social Media Icons */
@@ -147,4 +152,12 @@ h2 span {
   article h2 { 
      top: 70px; 
   }
+}
+
+/** Edit Post Styles */
+#btnPreviewPost{
+  margin-left: 10px;
+}
+#submitBtn{
+  margin-left: 10px;
 }

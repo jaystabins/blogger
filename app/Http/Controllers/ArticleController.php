@@ -84,6 +84,9 @@ class ArticleController extends Controller
 
         alert()->success('Post Created Successfully!', 'Success!');
 
+        if($article->status)
+            return redirect(route('blog.show', ['slug' => $article->slug]));
+
         return redirect('/');
     }
 
@@ -96,6 +99,24 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $article = Article::where('slug', '=', $slug)->published()->first();
+        $blog_info = \App\BlogInfo::first();
+
+        if( ! $article )
+            abort(404);
+
+        return view('articles.single', compact('article', 'blog_info'));
+    }
+
+    /**
+     * Display the specified resource in preview .
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showPreview($slug)
+    {
+        $article = Article::where('slug', '=', $slug)->first();
+
         $blog_info = \App\BlogInfo::first();
 
         if( ! $article )
@@ -157,9 +178,16 @@ class ArticleController extends Controller
             Category::setCategoryMenu($category->category_id, $addMenu);
         }
 
+        if($request->ajax()){
+            return $article;
+        }
+
         alert()->success('Post has been updated!', 'Success!');
 
-        return redirect(route('blog.show', ['slug' => $article->slug]));
+        if($article->status)
+            return redirect(route('blog.show', ['slug' => $article->slug]));
+
+        return redirect('/');
     }
 
     /**

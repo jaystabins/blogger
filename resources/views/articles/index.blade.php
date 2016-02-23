@@ -8,12 +8,6 @@
 					<div class="image">
 						<a href="{{ url('blog', $article->slug) }}">
 							<img src="{{ $article->featured_image != "" ? $article->featured_image : $info->featured_image }}" alt="" />
-							<h2>
-								<span>{{ $article->title }}</span><br />
-								@if($article->subtitle != '')
-									<span>{{ $article->subtitle }}</span>
-								@endif
-							</h2>
 						</a>
 					</div>
 					<p class="article-info">Posted In 
@@ -24,6 +18,14 @@
 						@endunless
 						{{ ' on ' . date("F j, Y", strtotime($article->published_at)) . " by " . $article->user->name  }}</p>
 					<div class="clearfix"> </div>
+					<div class="article-header">
+						<a href="{{ url('blog', $article->slug) }}">
+							<h1>{{ $article->title }}</h1>
+						</a>
+						@if($article->subtitle != '')
+							<h3>{{ $article->subtitle }}</h3>
+						@endif
+					</div>
 					<blockquote>{!! $article->excerpt !!} <a href="{{ url('blog', $article->slug) }}">...</a></blockquote>
 					@if(Auth::check() && Auth::id() == $article->user_id)
 						<p>

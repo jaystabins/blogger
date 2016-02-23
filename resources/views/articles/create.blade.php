@@ -8,7 +8,7 @@
 
 			{!! Form::open([ 'route' => 'blog.store', 'id' => 'article_form']) !!}
 				<div class="panel-body">
-
+					<input name="_method" type="hidden" value="POST">
 					@include('articles.partials.articleForm', ['submitButtonText' => 'Add Article'])
 
 				</div>

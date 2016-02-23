@@ -76,18 +76,23 @@
     </div>
     <small class="text-danger">{{ $errors->first('body') }}</small>
 
-    <img src="" id="featured-image" class="img-responsive">
+    <img src="" id="featured-image" class="img-responsive" />
 </div>
 
 @if(isset($article))
+<div class="form-group">
 	{!! Form::hidden('id', $article->id) !!}
+</div>
 @endif
-
+{!! Form::button('Save as Draft', ['class' => 'btn btn-default pull-left', 'id' => 'btnSaveDraft']) !!}
+{!! Form::button('Preview Post', ['class' => 'btn btn-default pull-left', 'id' => 'btnPreviewPost']) !!}
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-default pull-right', 'id' => 'submitBtn']) !!}
 
 
 @section('footer')
+    @parent
     <script>
+    $(document).ready(function() {
         if($('#category_list').val() != null)
             getCategoryMenuCheck();
 
@@ -202,5 +207,75 @@
                 }
             }) 
         }
+
+        $('#btnSaveDraft, #btnPreviewPost').on('click', function(e){
+            $('#status').prop('checked', false);
+
+            var buttonId = e.currentTarget.id;
+
+            for(instance in CKEDITOR.instances)
+                CKEDITOR.instances[instance].updateElement();
+
+            var type = $('input[name=_method]').val();
+
+            $.ajax({
+                url: $('#article_form').attr('action'),
+                type: $('input[name=_method]').val(),
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+                    if (token) {
+                         return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: $('#article_form').serialize(),
+                success: function(d) {
+                    if(buttonId == 'btnSaveDraft'){
+                        swal({   
+                            title: "Success!",   
+                            text: "Post Saved as Draft",   
+                            timer: 2000,   
+                            showConfirmButton: false,
+                            type: "success"
+                        });
+
+                        if(type == 'POST')
+                        {
+                            window.location.replace('{{ url() }}/blog/' + $('#slug').val() + '/edit');
+                        }
+                    }else{
+                        var win = window.open('{{ url() }}/blog/' + $('#slug').val() + '/preview', '_blank');
+
+                        if(win){
+                            win.focus();
+                        }else{
+                            swal({
+                                title: "Oops!",   
+                                text: "Please Allow Popups",   
+                                timer: 2000,   
+                                showConfirmButton: false,
+                                type: "warning"
+                            })
+                        }
+                    }
+                },
+                error: function(d){
+                    var errors = $.parseJSON(d.responseText);
+
+                    var display = '<div style="color:red;">';
+                    $.each(errors, function(index, value) {
+                        display += value + '<br>';
+                    });
+                    display += '</div>';
+
+                    swal({   
+                        title: "Error!",   
+                        text: display,   
+                        type: "error",
+                        html: true
+                    });
+                }
+            })
+        });
+    });
     </script>
 @endsection

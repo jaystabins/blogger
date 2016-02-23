@@ -53,6 +53,8 @@ Route::get('page/edit/{slug}', [
 			'as' => 'page.edit', 'uses' => 'PagesController@edit']);
 Route::post('page/sendMail', 'PagesController@sendContactMail');
 
+
+Route::get('blog/{slug}/preview', 'ArticleController@showPreview');
 /**
  * Main Manage Screen
  */

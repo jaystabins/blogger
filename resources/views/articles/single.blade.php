@@ -7,12 +7,6 @@
 			<article> 
 				<div class="image">
 					<img src="{{ $article->featured_image != "" ? $article->featured_image : $info->featured_image }}" alt="" />
-					<h2>
-						<span>{{ $article->title }}</span><br />
-						@if($article->subtitle != '')
-							<span>{{ $article->subtitle }}</span>
-						@endif
-					</h2>
 				</div>
 				<p class="article-info">Posted In 
 					@unless($article->categories->isEmpty())
@@ -23,6 +17,12 @@
 					{{ ' on ' . date("F j, Y", strtotime($article->published_at)) . " by " . $article->user->name  }}
 				</p>
 				<div class="article-body">
+					<div class="text-center article-header">
+						<h1>{{ $article->title }}</h1>
+						@if($article->subtitle != '')
+							<h3>{{ $article->subtitle }}</h3>
+						@endif
+					</div>
 					{!! $article->body !!}
 				</div>
 

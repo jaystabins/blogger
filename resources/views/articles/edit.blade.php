@@ -6,20 +6,20 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Edit: {!! $article->title !!}</div>
 
-			{!! Form::model( $article, [ 'route' => ['blog.update', $article->slug], 'method' => 'PUT', 'id' => 'article_form']) !!}
 				<div class="panel-body">
 
+				{!! Form::model( $article, [ 'route' => ['blog.update', $article->slug], 'method' => 'PUT', 'id' => 'article_form']) !!}
 					@include('articles.partials.articleForm', ['submitButtonText' => 'Update Article'])
 
 				
-					{!! Form::close() !!}
+				{!! Form::close() !!}
 
-					{!! Form::open(['route' => ['blog.destroy', $article->slug], 'method' => 'DELETE', 'id' => 'frmDelete']) !!}
+				{!! Form::open(['route' => ['blog.destroy', $article->slug], 'method' => 'DELETE', 'id' => 'frmDelete']) !!}
 
 						{!! Form::hidden('slug', $article->slug) !!}
 						{!! Form::button('Delete Article <i class="fa fa-trash-o"></i>', ['class' => 'btn btn-danger pull-right', 'id' => 'deleteBtn']) !!}
 
-					{!! Form::close() !!}
+				{!! Form::close() !!}
 
 				</div>
 		</div>

@@ -16,6 +16,24 @@ I am always welcome to to contribute to this project.  Please see my blog [Smash
 
 If you discover a security vulnerability within this blog, please send an e-mail to Jason Stabins at jay@smashub.com. All security vulnerabilities will be promptly addressed.
 
+### Plugins Used
+
+CKEditor
+CKFinder
+
+
 ### License
 
 The Simple Blog is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+###To Do
+
+1. DONE - Add Save Functionallity to Post Display
+2. DONE - Add Preview Functionallity to Post Displyay
+3. DONE - Favicon Upload and Setting
+4. Update Published Check Setting for Saved Posts/Draft Posts
+5. DONE - Redirect on Unpublished Post
+6. Post Query Strings for Redirects from Management Console
+	-Perhaps change pill navigation
+7. Category Specific Featued Images
+8. Sub Categories

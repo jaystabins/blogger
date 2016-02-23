@@ -21,7 +21,7 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth', ['except' => ['index', 'sendContactMail']]);
     }
 
 

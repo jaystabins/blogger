@@ -20,7 +20,8 @@ class BlogInfo extends Model
             'featured_image',
             'auto_category_menu',
             'disqus_shortname',
-            'category_navbar'
+            'category_navbar',
+            'favicon_image'
             ];
 
 }
