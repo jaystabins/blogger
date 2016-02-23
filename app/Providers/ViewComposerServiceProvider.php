@@ -141,7 +141,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     private function composeFooterSocialConnect()
     {
-        view()->composer(['app', 'partials.footer', 'articles.manage'], function($view)
+        view()->composer(['app', 'partials.footer', 'articles.manage', 'partials.metaSocialMedia'], function($view)
         {
             $view->with('socialConnect', DB::table('social_connect')->first());
         });
