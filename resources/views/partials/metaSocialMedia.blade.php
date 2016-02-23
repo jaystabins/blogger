@@ -7,10 +7,10 @@
 
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="{{ isset($article->featured_image) && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image }}">
-<meta name="twitter:site" content="{{ '@' . basename(parse_url($metaSocialMedia->twitter_url, PHP_URL_PATH)) }}">
+<meta name="twitter:site" content="{{ '@' . basename(parse_url($socialConnect->twitter_url, PHP_URL_PATH)) }}">
 <meta name="twitter:title" content="{{ isset($article->title) && !isset($articles) ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}">
 <meta name="twitter:description" content="{!! isset($article->excerpt) && !isset($articles) ? $article->excerpt : $info->tagline !!}">
-<meta name="twitter:creator" content="{{ '@' . basename(parse_url($metaSocialMedia->twitter_url, PHP_URL_PATH)) }}">
+<meta name="twitter:creator" content="{{ '@' . basename(parse_url($socialConnect->twitter_url, PHP_URL_PATH)) }}">
 <!-- Twitter summary card with large image must be at least 280x150px -->
 <meta name="twitter:image:src" content="{{ isset($article->featured_image) && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image }}">
 
