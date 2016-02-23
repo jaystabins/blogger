@@ -158,6 +158,20 @@
 
 							    <img src="" id="featured-image" class="img-responsive">
 							</div>
+							<hr />
+
+							<p class="text-center">Select a favicon for the site.</p>
+							<div class="form-group">
+							    {!! Form::label('favicon_image', 'Favicon:') !!}
+							    <div class="input-group">
+							        {!! Form::text('favicon_image', null, ['id' => 'favicon_image', 'class' => 'form-control', 'readonly' => 'true', 'required' => 'required']) !!}
+							        <span class="input-group-btn">
+							            <a class="btn btn-default" id="ckfinder-popup-favicon">Browse Server</a>
+							        </span>
+							    </div>
+							    <small class="text-danger">{{ $errors->first('favicon_image') }}</small>
+
+							</div>
 							{!! Form::submit('Update', ['class' => 'btn btn-default pull-right', 'id' => 'submitBtn']) !!}
 							{!! Form::close() !!}
 						</div>					
