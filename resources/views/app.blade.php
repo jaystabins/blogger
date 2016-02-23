@@ -11,7 +11,7 @@
 	<link rel="alternate" type="application/rss+xml" href="{{ url('rss') }}" title="RSS Feed {{ $info->blog_name }}">
 
 
-	@include('partials.metaSocialMedia')
+	@include('partials/metaSocialMedia')
 
 	<!-- token -->
 	<meta name="csrf_token" content="{{ csrf_token() }}" />
