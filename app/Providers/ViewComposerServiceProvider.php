@@ -116,7 +116,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     private function composeBlogInfo()
     {
-        view()->composer(['app', 'partials.footer', 'articles.index', 'articles.single', 'pages.index', 'articles.partials.articleForm', 'partials.mainNav'], function($view)
+        view()->composer(['app', 'partials.footer', 'articles.index', 'articles.single', 'pages.index', 'articles.partials.articleForm', 'partials.mainNav', 'partials.metaSocialMedia'], function($view)
         {
             $view->with('info', DB::table('blog_info')
                 ->first());

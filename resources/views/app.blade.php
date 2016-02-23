@@ -10,26 +10,10 @@
 
 	<link rel="alternate" type="application/rss+xml" href="{{ url('rss') }}" title="RSS Feed {{ $info->blog_name }}">
 
-	<!-- for Google -->
-	<meta name="description" content="{{ isset($article->excerpt) && !isset($articles)  ? $article->excerpt : $info->tagline }}" />
-	<meta name="keywords" content="{{ isset($article->title) && !isset($articles)  ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}" />
 
-	<meta name="copyright" content="Copyright {{ $info->blog_name }} <?php echo date('Y'); ?>" />
-	<meta name="application-name" content="{{ $info->blog_name }}" />
+	@include('partials.metaSocialMedia')
 
-	<!-- for Facebook -->          
-	<meta property="og:title" content="{{ isset($article->title) && !isset($articles) ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:image" content="{{ isset($article->featured_image) && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image }}" />
-	<meta property="og:url" content="{{ Request::url() }}" />
-	<meta property="og:description" content="{{ isset($article->subtitle) && !isset($articles) ? $article->subtitle : $info->tagline }}" />
-
-	<!-- for Twitter -->          
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="{{ isset($article->title) && !isset($articles) ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}" />
-	<meta name="twitter:description" content="{{ isset($article->subtitle) && !isset($articles) ? $article->subtitle : $info->tagline }}" />
-	<meta name="twitter:image" content="{{ isset($article->featured_image) && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image }}" />
-
+	<!-- token -->
 	<meta name="csrf_token" content="{{ csrf_token() }}" />
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
