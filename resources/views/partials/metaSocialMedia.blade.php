@@ -20,8 +20,11 @@
 <meta property="og:url" content="{{ Request::url() }}" />
 <meta property="og:image" content="{{ isset($article->featured_image) && $article->featured_image != '' && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image }}" />
 <!-- Force Scrape of Page -->
-<meta property="og:image:width" content="{{ imagesx(isset($article->featured_image) && $article->featured_image != '' && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image) }}"/>
-<meta property="og:image:height" content="{{ imagesy(isset($article->featured_image) && $article->featured_image != '' && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image) }}"/>
+<?php 
+	$size = getimagesize(isset($article->featured_image) && $article->featured_image != '' && !isset($articles) ? url() . $article->featured_image : url() . $info->featured_image);
+?>
+<meta property="og:image:width" content="{{ $size[0] }}"/>
+<meta property="og:image:height" content="{{ $size[1] }}"/>
 <meta property="og:description" content="{{ isset($article->excerpt) && !isset($articles) ? strip_tags($article->excerpt) : $info->tagline }}" />
 <meta property="og:site_name" content="{{ $info->blog_name }}" />
 <meta property="article:published_time" content="{{ isset($article->published_at) && !isset($articles) ? $article->published_at : date('Y-m-d') }}" />
