@@ -16,13 +16,13 @@
 					@endunless
 					{{ ' on ' . date("F j, Y", strtotime($article->published_at)) . " by " . $article->user->name  }}
 				</p>
+				<div class="text-center article-header">
+					<h1>{{ $article->title }}</h1>
+					@if($article->subtitle != '')
+						<h3 class="text-muted">{{ $article->subtitle }}</h3>
+					@endif
+				</div>
 				<div class="article-body">
-					<div class="text-center article-header">
-						<h1>{{ $article->title }}</h1>
-						@if($article->subtitle != '')
-							<h3>{{ $article->subtitle }}</h3>
-						@endif
-					</div>
 					{!! $article->body !!}
 				</div>
 
@@ -31,18 +31,18 @@
 						<p><a href="{{ route('blog.edit', ['slug' => $article->slug]) }}">Edit Article</a></p>
 				@endif
 
-				@if($article->show_sharebar)
-					@include('partials.socialSharebar')
-				@endif
-
 				@unless($article->tags->isEmpty())
 					<p>
-						<big>Tags:</big>
+						<i class="fa fa-tags"></i>
 						@foreach($article->tags as $tag)
-							<a href="{{ url('tags', $tag->name) }}">{{ $tag->name }}</a> &nbsp;
+							<a class="article-tag" href="{{ url('tags', $tag->name) }}">{{ $tag->name }}</a> &nbsp;
 						@endforeach
 					</p>
 				@endunless
+
+				@if($article->show_sharebar)
+					@include('partials.socialSharebar')
+				@endif
 
 			</article>
 			<div id="disqus_thread"></div>

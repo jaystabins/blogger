@@ -22,6 +22,7 @@
     	<hr>
     	@foreach($latestPosts as $post)
     		<article>
+                <i class="fa fa-ticket"></i>
     			<a href="{{ url('blog', $post->slug) }}">
     				{{ $post->title }}
     			</a>

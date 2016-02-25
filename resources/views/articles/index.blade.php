@@ -5,6 +5,15 @@
 		 <div class="col-sm-9 col-sm-push-3 blog-main">
 			<article> 
 				@foreach ($articles as $article)
+				<div class="article-summary">
+					<div class="article-header">
+						<a href="{{ url('blog', $article->slug) }}">
+							<h1>{{ $article->title }}</h1>
+						</a>
+						@if($article->subtitle != '')
+							<h3 class="text-muted">{{ $article->subtitle }}</h3>
+						@endif
+					</div>
 					<div class="image">
 						<a href="{{ url('blog', $article->slug) }}">
 							<img src="{{ $article->featured_image != "" ? $article->featured_image : $info->featured_image }}" alt="" />
@@ -18,32 +27,26 @@
 						@endunless
 						{{ ' on ' . date("F j, Y", strtotime($article->published_at)) . " by " . $article->user->name  }}</p>
 					<div class="clearfix"> </div>
-					<div class="article-header">
-						<a href="{{ url('blog', $article->slug) }}">
-							<h1>{{ $article->title }}</h1>
-						</a>
-						@if($article->subtitle != '')
-							<h3>{{ $article->subtitle }}</h3>
-						@endif
-					</div>
+
 					<blockquote>{!! $article->excerpt !!} <a href="{{ url('blog', $article->slug) }}">...</a></blockquote>
+
+					@unless($article->tags->isEmpty())
+						<p>
+							<i class="fa fa-tags"></i>
+							@foreach($article->tags as $tag)
+								<a class="article-tag" href="{{ url('tags', $tag->name) }}">{{ $tag->name }}</a> &nbsp;
+							@endforeach
+						</p>
+					@endunless
+
 					@if(Auth::check() && Auth::id() == $article->user_id)
 						<p>
 							<a href="{{ route('blog.edit', ['slug' => $article->slug]) }}">Edit Article</a> 
 						</p>
 					@endif
 
-					@unless($article->tags->isEmpty())
-						<p>
-							<big>Tags:</big>
-							@foreach($article->tags as $tag)
-								<a href="{{ url('tags', $tag->name) }}">{{ $tag->name }}</a> &nbsp;
-							@endforeach
-						</p>
-					@endunless
-
 					<hr>
-					
+				</div>
 				@endforeach
 			</article>
 		{!! $articles->render() !!}
