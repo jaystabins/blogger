@@ -32,6 +32,9 @@ a:hover{
   width:100%;
   overflow: hidden;
 }
+blockquote h3 {
+  margin-top: 0px;
+}
 article h2 { 
    position: absolute; 
    top: 100px; 
@@ -100,7 +103,8 @@ h2 span {
     border: 1px solid #aaa;
     border-radius: 4px;
     cursor: default;
-    padding: 0 5px;
+    padding: 0px 5px;
+    line-height: 30px;
 }
 
 /** Edit Post Styles */

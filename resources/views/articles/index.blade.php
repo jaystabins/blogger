@@ -31,12 +31,12 @@
 					<blockquote>{!! $article->excerpt !!} <a href="{{ url('blog', $article->slug) }}">...</a></blockquote>
 
 					@unless($article->tags->isEmpty())
-						<p>
+						<div class="row text-center">
 							<i class="fa fa-tags"></i>
 							@foreach($article->tags as $tag)
 								<a class="article-tag" href="{{ url('tags', $tag->name) }}">{{ $tag->name }}</a> &nbsp;
 							@endforeach
-						</p>
+						</div>
 					@endunless
 
 					@if(Auth::check() && Auth::id() == $article->user_id)

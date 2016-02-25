@@ -32,12 +32,12 @@
 				@endif
 
 				@unless($article->tags->isEmpty())
-					<p>
+					<div class="row text-center">
 						<i class="fa fa-tags"></i>
 						@foreach($article->tags as $tag)
 							<a class="article-tag" href="{{ url('tags', $tag->name) }}">{{ $tag->name }}</a> &nbsp;
 						@endforeach
-					</p>
+					</div>
 				@endunless
 
 				@if($article->show_sharebar)
