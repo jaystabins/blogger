@@ -3,6 +3,8 @@
 <meta property="og:title" content="{{ isset($article->title) && !isset($articles) ? $info->blog_name . ' | ' . $article->title : $info->blog_name }}" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="{{ Request::url() }}" />
+<meta property="og:image:width" content="720" /> 
+<meta property="og:image:height" content="250" />
 
 <meta name="description" content="{{ isset($article->excerpt) && !isset($articles) ? strip_tags($article->excerpt) : $info->tagline }}" />
  
