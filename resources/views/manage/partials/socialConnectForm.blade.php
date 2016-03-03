@@ -31,8 +31,8 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
 	    {!! Form::text('googlePlus_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
-        	{!! Form::hidden('googlePluse_active', 0) !!}
-			{!! Form::checkbox('googlePluse_active', true, isset($socialConnect) ? $socialConnect->googlePlus_active : false, ['id' => 'googlePluse_active']) !!}
+        	{!! Form::hidden('googlePlus_active', 0) !!}
+			{!! Form::checkbox('googlePlus_active', true, isset($socialConnect) ? $socialConnect->googlePlus_active : false, ['id' => 'googlePlus_active']) !!}
 		</span>
 	</div>
 	{!! Form::label('linkedin_url', 'LinkedIn:') !!}
@@ -49,8 +49,8 @@
 		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-pinterest"></i></span>
 	    {!! Form::text('pinterest_url', null, ['class' => 'form-control']) !!}
 		<span class="input-group-addon">
-        	{!! Form::hidden('pinterest_url', 0) !!}
-			{!! Form::checkbox('pinterest_url', true, isset($socialConnect) ? $socialConnect->pinterest_url : false, ['id' => 'pinterest_url']) !!}
+        	{!! Form::hidden('pinterest_active', 0) !!}
+			{!! Form::checkbox('pinterest_active', true, isset($socialConnect) ? $socialConnect->pinterest_active : false, ['id' => 'pinterest_active']) !!}
 		</span>
 	</div>
 	{!! Form::label('instagram_url', 'Instagram:') !!}
