@@ -37,3 +37,5 @@ The Simple Blog is open-sourced software licensed under the [MIT license](http:/
 	-Perhaps change pill navigation
 7. Category Specific Featued Images
 8. Sub Categories
+9. Make Social Links Dynamic
+	- Convert Social links to rows in table with Font Awesome links

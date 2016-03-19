@@ -34,6 +34,10 @@
 	<!-- Sweet Alert -->
 	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 
+	<!-- Add fancyBox -->
+	<link rel="stylesheet" href="/js/plugins/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+
+
 	<link rel="stylesheet"href="{{ asset('/css/app.css') }}"/>
 
 </head>
@@ -66,6 +70,9 @@
 
 	<!-- Sweet Alert -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+	<!-- Add fancyBox -->
+	<script src="/js/plugins/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 	@include('sweet::alert')
 
